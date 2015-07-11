@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Points of Sailing Quiz</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href='//fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
+    <script src="//code.jquery.com/jquery.min.js"></script>
+    <script src="js/app.js"></script>
+</head>
+<body>
+    <div class="welcome">
+        <h2>Do you know your points of sail?</h2>  
+        <p>The points of sail are important in communicating to your crew how you're going to point the boat in relation to the wind.</p>
+        <p>The points of sail can be thought of like a clock, with "In Irons" at twelve o'clock and "Beam Reach" at three o'clock.</p>
+        <img src="./images/wind.gif" alt="Points of Sailing Diagram">
+        <p>This site will give you a short quiz on the points of sail to test your knowledge.</p>
+        <h2>Good luck!</h2>
+        <p><em>Click anywhere on the page to start the quiz.</em></p>
+    </div>
+    
+    <div class="prep_page">
+        <h2>Ready to take the quiz?</h2>
+        <button>Go!</button>
+        <button>Keep studying</button>
+    </div>
+    
+    <div class="success">
+        <h1>Ahoy!</h1>
+        <p>Great job, mate.  You got it right.</p>
+        <p>100% so far, with 4 out of 5 correct.</p>
+    </div>
+    
+    <div class="failure">
+        <h1>Arrgh!</h1>
+        <p>Missed that one.  The correct answer was Beam Reach.</p>
+        <p>50% so far, with 2 out of 5 correct.</p>
+    </div>
+    
+    <div class="report_card">
+        <h1>Land ho!</h1>
+        <p>Nice work.  You completed the quiz.</p>
+        <p>Your final score was 60% with 3 out of 5 correct.</p>
+        <p>Keep learning and we'll see you on the water.</p>
+    </div>
+    
+    <div class="quiz_page">
+        <h2>Question 1 of 5</h2>
+        <img src="./images/close_hauled.png" alt="Points of Sailing Diagram">   
+        <form action="submit">
+            <input type="radio" name="point" value="close_hauled">Close-hauled
+            <br>
+            <input type="radio" name="point" value="beam_reach">Beam Reach 
+            <br>
+            <input type="radio" name="point" value="broad_reach">Broad Reach
+            <br>
+            <input type="radio" name="point" value="in_irons">In-irons   
+            <br>
+            <input type="submit" value="Submit">              
+        </form>     
+    </div>
+</body>
+</html>
