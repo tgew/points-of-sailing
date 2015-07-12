@@ -18,19 +18,12 @@
         <img src="./images/wind.gif" alt="Points of Sailing Diagram">
         <p>This site will give you a short quiz on the points of sail to test your knowledge.</p>
         <h2>Good luck!</h2>
-        <br>
-        <p>Ready to go?</p>
-        <a class="close" href="#">Got It!</a>
-<!--        <p><em>Click anywhere on the page to start the quiz.</em></p>-->
+
+        <p><em>Study the diagram for a few minutes and then click anywhere on the page when you're ready to start the quiz.</em></p>
     </div>
+
     
-    <div id="prep_page" class="modal">
-        <h2>Ready to take the quiz?</h2>
-        <button>Go!</button>
-        <button>Keep studying</button>
-    </div>
-    
-    <div id="success" class="modal">
+    <div id="status_card" class="modal">
         <h1>Ahoy!</h1>
         <p>Great job, mate.  You got it right.</p>
         <p>100% so far, with 4 out of 5 correct.</p>
@@ -49,19 +42,19 @@
         <p>Keep learning and we'll see you on the water.</p>
     </div>
     
-    <div id="quiz_page" class="modal">
+    <div id="quiz_view" class="modal">
         <h2>Question 1 of 5</h2>
         <img src="./images/close_hauled.png" alt="Points of Sailing Diagram">   
-        <form id="quiz_form">
-            <input type="radio" name="point" value="close_hauled">Close-hauled
+        <form>
+            <input type="radio" name="point" value="close_hauled">Close Hauled
             <br>
             <input type="radio" name="point" value="beam_reach">Beam Reach 
             <br>
             <input type="radio" name="point" value="broad_reach">Broad Reach
             <br>
-            <input type="radio" name="point" value="in_irons">In-irons   
+            <input type="radio" name="point" value="in_irons">In Irons   
             <br>
-            <input type="submit" value="Submit">              
+            <div id="submit_button">Submit</div>              
         </form>     
     </div>
 </body>
