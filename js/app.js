@@ -1,10 +1,12 @@
 var answer;
 
-function newQuizQuestion() {
+function makeQuizQuestion() {
+    
+    var QuizQuestion = {};
 
 // Pick and answer and display the image for it.
-    answer = Math.floor(Math.random()*6);
-    displayImage(answer);
+    QuizQuestion.answer = Math.floor(Math.random()*6);
+    displayImage(QuizQuestion.answer);
 
 
     var chooseFrom = [0, 1, 2, 3, 4, 5]
@@ -12,7 +14,7 @@ function newQuizQuestion() {
     var chooseIndex;
 
 // Push the correct answer into the questions array.    
-    questionsArray.push(answer);
+    questionsArray.push(QuizQuestion.answer);
     for(var i = chooseFrom.length - 1; i >= 0; i--) {
         if(chooseFrom[i] === answer) {
             chooseFrom.splice(i, 1);
@@ -29,8 +31,9 @@ function newQuizQuestion() {
     questionsArray.push(chooseFrom[0]);
     
 // Now we should have questionArray filled with options and one of them is the answer.
-return questionsArray;
+    QuizQuestion.questionsArray = questionsArray
     
+return QuizQuestion;
 }
 
 function displayImage(imageNumber) {
@@ -55,9 +58,12 @@ function displayImage(imageNumber) {
     }
 }
 
-function displayQA(questionList, answer){
-
-
+function displayQuestions(questionList){
+    var itemLabels = ["In irons", "Close hauled", "Close reach", "Beam reach", "Broad reach", "Running"]
+    $("#question1").next().html(itemLabels[questionList[0]]);
+    $("#question2").next().html(itemLabels[questionList[1]]);                                         
+    $("#question3").next().html(itemLabels[questionList[2]]);
+    $("#question4").next().html(itemLabels[questionList[3]]);                                         
 }
 
 $(document).ready(function() {
@@ -69,8 +75,9 @@ $(document).ready(function() {
   		$("#welcome").fadeOut(10);
         $("#quiz_view").fadeIn(10);
         // create a new quiz object
-        newQuizQuestion();
-        displayImage(answer);
+        var quizQuestion1 = makeQuizQuestion();
+        displayImage(quizQuestion1.answer);
+        displayQuestions(quizQuestion1.questionsArray);
   	});
     
     $("#submit_button").click(function(){
