@@ -1,32 +1,46 @@
+// answer key object
+//   key pairs: image (point of sail), name
+//   each object has a point of sail, an image name
+
 var answer;
 
-function newQuizQuestion() {
+// function create_quiz
+//   choose five random images and their answers
 
-// Pick and answer and display the image for it.
+// function create_question
+//   given an answer pair, randomly select 3 other answer
+//   return an array of 
+
+function newQuiz() {
+
+    var match = false;
     answer = Math.floor(Math.random()*6);
     displayImage(answer);
 
 
-    var chooseFrom = [0, 1, 2, 3, 4, 5]
     var questionsArray = [];
-    var chooseIndex;
-
-// Push the correct answer into the questions array.    
+    var singleQuestion;
+    
     questionsArray.push(answer);
-    for(var i = chooseFrom.length - 1; i >= 0; i--) {
-        if(chooseFrom[i] === answer) {
-            chooseFrom.splice(i, 1);
+
+    console.log("Initializing quiz.");
+    while(questionsArray.length < 5) {
+        console.log(questionsArray.length);
+        singleQuestion = Math.floor(Math.random()*6);
+        if(singleQuestion != answer) {
+            console.log("SingleQuestion doesn't equal answer.");
+            for(var i=0; i < questionsArray.length; i++){
+                if(singleQuestion == questionsArray[i]) {
+                    console.log("Found match.");
+                    match = true;
+                    break;
+                }
+            }
+            if(!match) {
+                questionsArray.push(singleQuestion);
+            }
         }
-    }
-
-    while(questionsArray.length < 4) {
-        chooseIndex = Math.floor(Math.random()*chooseFrom.length);
-        questionsArray.push(chooseFrom[chooseIndex]);
-        chooseFrom.splice(chooseIndex, 1);    
     }    
-
-// When there is only one element left in the chooseFrom array, we don't need to pick a random number.
-    questionsArray.push(chooseFrom[0]);
     
 // Now we should have questionArray filled with options and one of them is the answer.
 return questionsArray;
@@ -55,10 +69,7 @@ function displayImage(imageNumber) {
     }
 }
 
-function displayQA(questionList, answer){
-
-
-}
+//function displayQA(questionList, ){}
 
 $(document).ready(function() {
     
@@ -69,7 +80,7 @@ $(document).ready(function() {
   		$("#welcome").fadeOut(10);
         $("#quiz_view").fadeIn(10);
         // create a new quiz object
-        newQuizQuestion();
+        newQuiz();
         displayImage(answer);
   	});
     
