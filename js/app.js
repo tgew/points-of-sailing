@@ -23,12 +23,17 @@ function newQuiz() {
     
     questionsArray.push(answer);
 
+    console.log("Initializing quiz.");
     while(questionsArray.length < 5) {
+        console.log(questionsArray.length);
         singleQuestion = Math.floor(Math.random()*6);
         if(singleQuestion != answer) {
+            console.log("SingleQuestion doesn't equal answer.");
             for(var i=0; i < questionsArray.length; i++){
                 if(singleQuestion == questionsArray[i]) {
+                    console.log("Found match.");
                     match = true;
+                    break;
                 }
             }
             if(!match) {
@@ -64,7 +69,7 @@ function displayImage(imageNumber) {
     }
 }
 
-
+//function displayQA(questionList, ){}
 
 $(document).ready(function() {
     
@@ -72,8 +77,8 @@ $(document).ready(function() {
 
 
   	$("#welcome").click(function(){
-  		$("#welcome").fadeOut(0);
-        $("#quiz_view").fadeIn(0);
+  		$("#welcome").fadeOut(10);
+        $("#quiz_view").fadeIn(10);
         // create a new quiz object
         newQuiz();
         displayImage(answer);
