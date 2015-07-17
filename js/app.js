@@ -1,8 +1,13 @@
 var answer;
+var correctAnswers = 0;
+var currentQuestion = 0;
 
 function makeQuizQuestion() {
     
     var QuizQuestion = {};
+    
+// Since we're creating the next question, increment the currentQuestion number.
+    currentQuestion++;
 
 // Pick and answer and display the image for it.
     QuizQuestion.answer = Math.floor(Math.random()*6);
@@ -66,6 +71,18 @@ function displayQuestions(questionList){
     $("#question4").next().html(itemLabels[questionList[3]]);                                         
 }
 
+function displayStats(answerValue){
+    var percentRight = Math.floor(100*(correctAnswers/currentQuestion));
+    $("#numberRight").text(correctAnswers);
+    $(".totalQuestions").text(currentQuestion);
+    $("#percentage").text(percentRight);
+    if (answerValue) {
+        $("#statusGreeting").text("Great job, mate.  You got it right.");
+    } else {
+        $("#statusGreeting").text("Arggh!  Keep studying, landlubber.");
+    }
+}
+
 $(document).ready(function() {
     
     $("#welcome").fadeIn(1000);
@@ -76,6 +93,7 @@ $(document).ready(function() {
         $("#quiz_view").fadeIn(10);
         // create a new quiz object
         var quizQuestion1 = makeQuizQuestion();
+        answer = quizQuestion1.answer;
         displayImage(quizQuestion1.answer);
         displayQuestions(quizQuestion1.questionsArray);
   	});
@@ -83,18 +101,28 @@ $(document).ready(function() {
     $("#submit_button").click(function(){
         var radios = document.getElementsByTagName('input');
         var value;
+        var answerValue = false;
         for (var i = 0; i < radios.length; i++) {
             if (radios[i].type === 'radio' && radios[i].checked) {
                 value = radios[i].value;  
-                console.log(value);
+                if (value == answer) {
+                    correctAnswers++;
+                    answerValue = true;
+                }
+                $("#quiz_view").fadeOut(10);
+                $("#status_card").fadeIn(10);
+                displayStats(answerValue);                
             }
         }
-        $("#quiz_view").fadeOut(500);
-        $("#status_card").fadeIn(500);
-        
-        // check the answer
-        // insert the status data in the card
-        // wait for user to click on finished        
+    });
+    
+    $("#status_card").click(function(){
+        $("#status_card").fadeOut(10);   
+        $("#quiz_view").fadeIn(10);
+        var quizQuestion1 = makeQuizQuestion();
+        answer = quizQuestion1.answer;
+        displayImage(quizQuestion1.answer);
+        displayQuestions(quizQuestion1.questionsArray);        
     });
     
     
