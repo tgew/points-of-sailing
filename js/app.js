@@ -105,10 +105,12 @@ $(document).ready(function() {
         for (var i = 0; i < radios.length; i++) {
             if (radios[i].type === 'radio' && radios[i].checked) {
                 value = radios[i].value;  
+                radios[i].checked = false;
                 if (value == answer) {
                     correctAnswers++;
                     answerValue = true;
                 }
+                
                 $("#quiz_view").fadeOut(10);
                 $("#status_card").fadeIn(10);
                 displayStats(answerValue);                
