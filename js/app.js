@@ -1,6 +1,8 @@
 var score = {
     numberCorrect: 0,
     workingQuestion: 0,
+    finished: false,
+    maxQuestions: 2,
     percentCorrect: function(){
         return Math.floor(100*(this.numberCorrect/this.workingQuestion))
     }
@@ -12,11 +14,12 @@ function makeQuizQuestion() {
     
 // Since we're creating the next question, increment the currentQuestion number.
     score.workingQuestion++;
+    if(score.workingQuestion > score.maxQuestions){
+        score.finished = true;
+    }
 
 // Pick and answer and display the image for it.
     QuizQuestion.answer = Math.floor(Math.random()*6);
-//    displayImage(QuizQuestion.answer);
-
 
     var chooseFrom = [0, 1, 2, 3, 4, 5];
     var questionsArray = [];
@@ -30,7 +33,7 @@ function makeQuizQuestion() {
         }
     }
 
-    while (questionsArray.length < 4) {
+    while (questionsArray.length < 3) {
         chooseIndex = Math.floor(Math.random()*chooseFrom.length);
         questionsArray.push(chooseFrom[chooseIndex]);
         chooseFrom.splice(chooseIndex, 1);    
@@ -91,8 +94,8 @@ $(document).ready(function() {
     
     $("#welcome").fadeIn(1000);
 // Create a new quiz object    
-    var firstQuestion = makeQuizQuestion();
-    displayQuiz(firstQuestion);
+    var newQuestion = makeQuizQuestion();
+    displayQuiz(newQuestion);
 
     $("#welcome").on('click', function() {
   		$("#welcome").fadeOut(10);
@@ -108,7 +111,7 @@ $(document).ready(function() {
             if (radios[i].type === 'radio' && radios[i].checked) {
                 value = radios[i].value;  
                 radios[i].checked = false;
-                if (value == firstQuestion.answer) {
+                if (value == newQuestion.answer) {
                     score.numberCorrect++;
                     correctAnswer = true;
                 }
@@ -120,8 +123,15 @@ $(document).ready(function() {
     });
     
     $("#status_card").on('click', function(){
-        $("#status_card").fadeOut(10);   
-        $("#quiz_view").fadeIn(10);    
+        if(!score.finished) {
+            var newQuestion = makeQuizQuestion();
+            displayQuiz(newQuestion);        
+            $("#status_card").fadeOut(10);   
+            $("#quiz_view").fadeIn(10);    
+        } else {
+            $("#status_card").fadeOut(10); 
+            $("#report_card").fadeIn(10);
+        }
     });
     
     
