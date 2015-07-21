@@ -10,11 +10,18 @@ body {
 }
 
 .view {
-    position: absolute;
-    top 0;
-    left 0;
-    margin: 0;
+/*    position: absolute;*/
+/*    top 0;*/
+/*    left 0;*/
+    width: 25em;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: justify;
     display: none;
+}
+
+h1, h2 {
+    text-align: center;
 }
 
 .close {
@@ -27,4 +34,12 @@ body {
 
 #prep_page {
 /*    display: inline;*/
+}
+
+#welcome_img {
+    width: 100%;
+}
+
+em {
+    color:brown;
 }
