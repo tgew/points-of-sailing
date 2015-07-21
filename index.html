@@ -15,7 +15,7 @@
         <h2>Do you know your points of sail?</h2>  
         <p>The points of sail are important in communicating to your crew how you're going to point the boat in relation to the wind.</p>
         <p>The points of sail can be thought of like a clock, with "In Irons" at twelve o'clock and "Beam Reach" at three o'clock.</p>
-        <img src="./images/wind.gif" alt="Points of Sailing Diagram">
+        <img id="welcome_img" src="./images/wind.gif" alt="Points of Sailing Diagram">
         <p>This site will give you a short quiz on the points of sail to test your knowledge.</p>
         <h2>Good luck!</h2>
 
@@ -26,21 +26,23 @@
     <div id="status_card" class="view">
         <h1>Ahoy!</h1>
         <p id="statusGreeting"></p>
-        <p><span id="percentage"></span>% so far, with <span id="numberRight"></span> out of <span class="totalQuestions"></span> correct.</p>
+        <p><span class="percentage"></span>% so far, with <span class="numberRight"></span> out of <span class="totalQuestions"></span> correct.</p>
     </div>
     
     <div id="report_card" class="view">
         <h1>Land ho!</h1>
         <p>Nice work.  You completed the quiz.</p>
-        <p>Your final score was 60% with 3 out of 5 correct.</p>
+        <p>Your final score was <span class="percentage"></span>% with <span class="numberRight"></span> out of <span class="totalQuestions"></span> correct.</p>
         <p>Keep learning and we'll see you on the water.</p>
         <p></p>
-        <p>Reload the page to take the quiz again.</p>
+        <p><em>Reload the page to take the quiz again.</em></p>
     </div>
     
     <div id="quiz_view" class="view">
-        <h2>Question 1 of <span class="totalQuestions"></span></h2>
-        <img src="./images/close_hauled.png" alt="Points of Sailing Diagram">   
+        <h2>Question <span class="questionNo"></span> of <span class="totalQuestions"></span></h2>
+        <img src="./images/close_hauled.png" alt="Points of Sailing Diagram">  
+        <br>
+        <br>
         <form>
             <input type="radio" name="question" value="0" id="question1"><label for="question1"></label>
             <br>
@@ -50,7 +52,8 @@
             <br>
             <input type="radio" name="question" value="3" id="question4"><label for="question4"></label>   
             <br>
-            <div id="submit_button">Submit</div>         
+            <br>
+            <button id="submit_button">Submit</button>         
         </form>     
     </div>
 </body>

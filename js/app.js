@@ -2,7 +2,7 @@ var score = {
     numberCorrect: 0,
     workingQuestion: 0,
     finished: false,
-    maxQuestions: 2,
+    maxQuestions: 3,
     percentCorrect: function(){
         return Math.floor(100*(this.numberCorrect/this.workingQuestion))
     }
@@ -11,19 +11,18 @@ var score = {
 function makeQuizQuestion() {
     
     var QuizQuestion = {};
+    var chooseFrom = [0, 1, 2, 3, 4, 5];
+    var questionsArray = [];
+    var chooseIndex;
     
 // Since we're creating the next question, increment the currentQuestion number.
     score.workingQuestion++;
-    if(score.workingQuestion > score.maxQuestions){
+    if(score.workingQuestion == score.maxQuestions){
         score.finished = true;
     }
 
 // Pick and answer and display the image for it.
     QuizQuestion.answer = Math.floor(Math.random()*6);
-
-    var chooseFrom = [0, 1, 2, 3, 4, 5];
-    var questionsArray = [];
-    var chooseIndex;
 
 // Push the correct answer into the questions array.    
     questionsArray.push(QuizQuestion.answer);
@@ -61,7 +60,11 @@ return QuizQuestion;
 }
 
 function displayQuiz(question) {
-    var itemLabels = ["In irons", "Close hauled", "Close reach", "Beam reach", "Broad reach", "Running"];
+    var itemLabels = ["&nbsp;In irons", "&nbsp;Close hauled", "&nbsp;Close reach", "&nbsp;Beam reach", "&nbsp;Broad reach", "&nbsp;Running"];
+    
+// Display the number of questions info
+    $(".questionNo").text(score.workingQuestion);
+    $(".totalQuestions").text(score.maxQuestions);
 
 // Display the image of the answer.
     switch(question.answer) {
@@ -92,9 +95,9 @@ function displayQuiz(question) {
 }
 
 function displayStats(answerValue){
-    $("#numberRight").text(score.numberCorrect);
+    $(".numberRight").text(score.numberCorrect);
     $(".totalQuestions").text(score.workingQuestion);
-    $("#percentage").text(score.percentCorrect());
+    $(".percentage").text(score.percentCorrect());
     if (answerValue) {
         $("#statusGreeting").text("Great job, mate.  You got it right.");
     } else {
@@ -103,8 +106,10 @@ function displayStats(answerValue){
 }
 
 $(document).ready(function() {
+    var $welcomeCard = $("#welcome");
+    var $submit_button = $("submit_button");
     
-    $("#welcome").fadeIn(1000);
+    $welcomeCard.fadeIn(1000);
 // Create a new quiz object    
     var newQuestion = makeQuizQuestion();
     displayQuiz(newQuestion);
@@ -115,7 +120,8 @@ $(document).ready(function() {
     });    
     
     
-    $("#submit_button").on('click', function(){
+    $("#submit_button").on('click', function(e){
+        e.preventDefault();
         var radios = document.getElementsByTagName('input');
         var correctAnswer = false;
         
@@ -135,7 +141,7 @@ $(document).ready(function() {
     
     $("#status_card").on('click', function(){
         if(!score.finished) {
-            var newQuestion = makeQuizQuestion();
+            newQuestion = makeQuizQuestion();
             displayQuiz(newQuestion);        
             $("#status_card").fadeOut(10);   
             $("#quiz_view").fadeIn(10);    
@@ -143,8 +149,7 @@ $(document).ready(function() {
             $("#status_card").fadeOut(10); 
             $("#report_card").fadeIn(10);
         }
-    });
-    
+    });   
     
 });  // Document Ready closure
 
