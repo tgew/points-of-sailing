@@ -27,12 +27,15 @@ function makeQuizQuestion() {
 
 // Push the correct answer into the questions array.    
     questionsArray.push(QuizQuestion.answer);
+    
+// Remove the correct answer from the chooseFrom array.    
     for (var i = chooseFrom.length - 1; i >= 0; i--) {
         if(chooseFrom[i] === QuizQuestion.answer) {
             chooseFrom.splice(i, 1);
         }
     }
 
+// Randomly choose three wrong answers for the quiz.
     while (questionsArray.length < 3) {
         chooseIndex = Math.floor(Math.random()*chooseFrom.length);
         questionsArray.push(chooseFrom[chooseIndex]);
@@ -41,6 +44,15 @@ function makeQuizQuestion() {
 
 // When there is only one element left in the chooseFrom array, we don't need to pick a random number.
     questionsArray.push(chooseFrom[0]);
+
+// Randomize array element order in-place.  Using Fisher-Yates shuffle algorithm.
+
+    for (var i = questionsArray.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = questionsArray[i];
+        questionsArray[i] = questionsArray[j];
+        questionsArray[j] = temp;
+    }
     
 // Now we should have questionArray filled with options and the first one of them is the answer.
     QuizQuestion.questionsArray = questionsArray;
