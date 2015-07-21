@@ -42,7 +42,7 @@ function makeQuizQuestion() {
 // When there is only one element left in the chooseFrom array, we don't need to pick a random number.
     questionsArray.push(chooseFrom[0]);
     
-// Now we should have questionArray filled with options and one of them is the answer.
+// Now we should have questionArray filled with options and the first one of them is the answer.
     QuizQuestion.questionsArray = questionsArray;
     
 return QuizQuestion;
@@ -105,13 +105,12 @@ $(document).ready(function() {
     
     $("#submit_button").on('click', function(){
         var radios = document.getElementsByTagName('input');
-        var value;
         var correctAnswer = false;
+        
         for (var i = 0; i < radios.length; i++) {
             if (radios[i].type === 'radio' && radios[i].checked) {
-                value = radios[i].value;  
                 radios[i].checked = false;
-                if (value == newQuestion.answer) {
+                if (newQuestion.questionsArray[i] == newQuestion.answer) {
                     score.numberCorrect++;
                     correctAnswer = true;
                 }
